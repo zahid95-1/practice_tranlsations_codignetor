@@ -159,13 +159,13 @@
                                         </a>
                                         <ul class="sub-menu mm-collapse" aria-expanded="false">
                                                 <?php if (ConfigData['mt5_desktop_app']): ?>
-                                                        <li><a href="<?=ConfigData['mt5_desktop_app']}"><?= lang('mt5_desktop') ?></a></li>
+                                                        <li><a href="<?=ConfigData['mt5_desktop_app']?>"><?= lang('mt5_desktop') ?></a></li>
                                                 <?php endif; ?>
                                                 <?php if (ConfigData['mt5_android_app']): ?>
-                                                        <li><a href="<?=ConfigData['mt5_android_app']}"><?= lang('mt5_android') ?></a></li>
+                                                        <li><a href="<?=ConfigData['mt5_android_app']?>"><?= lang('mt5_android') ?></a></li>
                                                 <?php endif; ?>
                                                 <?php if (ConfigData['mt5_ios_app']): ?>
-                                                        <li><a href="<?=ConfigData['mt5_ios_app']}"><?= lang('mt5_ios') ?></a></li>
+                                                        <li><a href="<?=ConfigData['mt5_ios_app']?>"><?= lang('mt5_ios') ?></a></li>
                                                 <?php endif; ?>
                                         </ul>
                                 </li>
