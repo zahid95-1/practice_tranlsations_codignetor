@@ -1,0 +1,226 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class CSV extends CI_Controller {
+
+	public function __construct() {
+		parent::__construct();
+		$this->load->helper('url');
+		$this->load->library('upload');
+	}
+
+	public function uploadTradingAccount(){
+		$config['upload_path'] = './assets/csvImport';
+		$config['allowed_types'] = 'csv';
+		$config['max_size'] = 100000000; // 2MB
+
+		$this->upload->initialize($config);
+
+		if ($this->upload->do_upload('csv_file')) {
+			$file_data = $this->upload->data();
+			$file_path = $file_data['full_path'];
+			$csv_data = $this->read_csv($file_path);
+
+			$inserted_count = 0;
+			$now = date('Y-m-d H:i:s');
+
+			foreach ($csv_data as $key=>$userGroup) {
+
+				$email	=$userGroup[0];
+				$groupNameEscaped	=addslashes($userGroup[4]);
+				$traddingAcount	=$userGroup[6];
+
+				// Check if the user already exists
+				if (!$this->trading_account_exist($traddingAcount)) {
+					$getGroupNameExist = $this->db->query("SELECT * FROM `groups` WHERE `mt5_group_name` = '" . $groupNameEscaped . "'")->row();
+
+					$getUsers = $this->db->query("SELECT * FROM `users` WHERE `email` = '" . $email . "'")->row();
+
+					if ($getGroupNameExist && $getUsers){
+						$mt5TradingObject			=json_encode([]);
+
+						$permitted_chars 	= '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						$investorPassword	=substr(str_shuffle($permitted_chars), 0, 10);
+
+						$data['mt5_login_id'] 		=$traddingAcount;
+						$data['balance'] 			=0;
+						$data['created_by'] 		=1;
+						$data['group_id'] 			=$getGroupNameExist->id;
+						$data['account_type_status'] =2;
+						$data['mt5_response'] 		= $mt5TradingObject;
+						$data['client'] 			= 'web';
+						$data['leverage'] 			= 500;
+						$data['user_id'] 			= $getUsers->user_id;
+						$data['pass_main'] 			= openssl_decrypt($getUsers->raw_pwd,"AES-128-ECB",'password');
+						$data['pass_investor'] 		= $investorPassword;
+
+						// Insert the data
+						$this->db->insert('trading_accounts', $data);
+					}
+
+					$inserted_count++; // Increment the inserted count
+				}
+			}
+
+			$title['title']							='Import CSV';
+			$_SESSION['import_trading_data_insert']	='User list imported successfully';
+			$this->load->view('includes/header',$title);
+			$this->load->view('includes/left_side_bar');
+			$this->load->view('import/index',array ('count'=>$inserted_count));
+			$this->load->view('includes/footer');
+
+		} else {
+			echo $this->upload->display_errors();
+		}
+	}
+
+	public function uploadGroup(){
+
+		$config['upload_path'] = './assets/csvImport';
+		$config['allowed_types'] = 'csv';
+		$config['max_size'] = 100000000; // 2MB
+
+		$this->upload->initialize($config);
+
+		if ($this->upload->do_upload('csv_file')) {
+			$file_data = $this->upload->data();
+			$file_path = $file_data['full_path'];
+			$csv_data = $this->read_csv($file_path);
+
+			$inserted_count = 0;
+
+			$now 				= date('Y-m-d H:i:s');
+			foreach ($csv_data as $key=>$userGroup) {
+
+				if ($key==0){
+					continue;
+				}
+
+				$groupName=$userGroup[0];
+				$normalGroupName=$userGroup[1];
+
+				// Check if the user already exists
+				if (!$this->user_exists_group_name($groupName)) {
+					$insertData = array(
+						'group_name'=>$normalGroupName,
+						'mt5_group_name'=>$groupName,
+						'minimum_deposit'=>'',
+						'spread_from'=>'',
+						'commission'=>'',
+						'swap'=>2,
+						'mt5_response'=>'',
+						'status'=>1,
+						'created_by'=>1,
+						'created_at'=>$now);
+
+					// Insert the data
+					$this->db->insert('groups', $insertData);
+					$inserted_count++; // Increment the inserted count
+				}
+			}
+
+			$title['title']					='Import CSV';
+			$_SESSION['import_trading_data']='User list imported successfully';
+			$this->load->view('includes/header',$title);
+			$this->load->view('includes/left_side_bar');
+			$this->load->view('import/index',array ('count'=>$inserted_count));
+			$this->load->view('includes/footer');
+
+		} else {
+			echo $this->upload->display_errors();
+		}
+	}
+
+	public function uploadUsers() {
+		$config['upload_path'] = './assets/csvImport';
+		$config['allowed_types'] = 'csv';
+		$config['max_size'] = 100000000; // 2MB
+
+		$this->upload->initialize($config);
+
+		if ($this->upload->do_upload('csv_file')) {
+			$file_data = $this->upload->data();
+			$file_path = $file_data['full_path'];
+			$csv_data = $this->read_csv($file_path);
+
+			$inserted_count = 0;
+
+			foreach ($csv_data as $user) {
+				// Extract email from the user array (assuming email is index 7)
+				$email = $user[2];
+
+				// Check if the user already exists
+				if (!$this->user_exists($email)) {
+					$password='Teamp@Pass2024';
+					$rawpwd = openssl_encrypt($this->security->xss_clean($password),"AES-128-ECB",'password');
+					$now 				= date('Y-m-d H:i:s');
+
+					$insertData = array(
+						'unique_id'=>ConfigData['prefix'].rand(1000,9999).rand(10,99),
+						'email'=>$email,
+						'mobile'=>$user[5],
+						'country_id'=>99,
+						'city'=>$user[1],
+						'first_name'=>$user[0],
+						'parent_id'=>ConfigData['admin_prefix'],
+						'password'=>md5($password),
+						'raw_pwd'=>$rawpwd,
+						'last_name'=>'',
+						'birth_date'=>'',
+						'created_by'=>$email,
+						'created_datetime'=>$now);
+
+					// Insert the data
+					$this->db->insert('users', $insertData);
+					$inserted_count++; // Increment the inserted count
+				}
+			}
+
+			$title['title']					='Import CSV';
+			$_SESSION['import_data']='User list imported successfully';
+			$this->load->view('includes/header',$title);
+			$this->load->view('includes/left_side_bar');
+			$this->load->view('import/index',array ('count'=>$inserted_count));
+			$this->load->view('includes/footer');
+
+		} else {
+			echo $this->upload->display_errors();
+		}
+	}
+
+	public function user_exists($email) {
+		$this->db->where('email', $email);
+		$query = $this->db->get('users'); // Assuming your table is named 'users'
+		return $query->num_rows() > 0;
+	}
+
+	public function trading_account_exist($mt5_login_id) {
+		$this->db->where('mt5_login_id', $mt5_login_id);
+		$query = $this->db->get('trading_accounts'); // Assuming your table is named 'users'
+		return $query->num_rows() > 0;
+	}
+
+	public function user_exists_group_name($groupNameMt5) {
+		$this->db->where('mt5_group_name', $groupNameMt5);
+		$query = $this->db->get('groups'); // Assuming your table is named 'users'
+		return $query->num_rows() > 0;
+	}
+
+	public function read_csv($file_path) {
+		$csv_data = array();
+		if (($handle = fopen($file_path, "r")) !== FALSE) {
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$csv_data[] = $data;
+			}
+			fclose($handle);
+		}
+		return $csv_data;
+	}
+	public function view(){
+		$title['title']					='Import CSV';
+		$this->load->view('includes/header',$title);
+		$this->load->view('includes/left_side_bar');
+		$this->load->view('import/index',['count'=>0]);
+		$this->load->view('includes/footer');
+	}
+}
