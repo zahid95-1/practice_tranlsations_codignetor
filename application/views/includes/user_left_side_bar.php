@@ -25,16 +25,16 @@
                                                                 <li><a href="<?=base_url()?>user/level-wise-withdrawal-history"><?= lang('level_wise_withdrawal_history') ?></a></li>
         
         							<li><a href="<?=base_url()?>user/ib-withdraw"><?= lang('commission_transfer_to_mt5') ?></a></li>
-        							<?php if (ConfigData['enable_disable_ib_withdraw']==true) :?>
-        							<li><a href="<?=base_url()?>user/ib-commission-withdraw">IB Commission Withdraw</a></li>
-        						    <?php endif; ?>
+                                                                <?php if (ConfigData['enable_disable_ib_withdraw']==true) :?>
+                                                                <li><a href="<?=base_url()?>user/ib-commission-withdraw"><?= lang('ib_commission_withdraw') ?></a></li>
+                                                            <?php endif; ?>
         							<li><a href="<?=base_url()?>user-ib-commission-group"><?= lang('ib_commission_setting') ?></a></li>
         							<!-- <li><a href="<?=base_url()?>user-ib-commission-ref">IB Commission Ref setting</a></li> -->
         							
         						</ul>
         					<?php }else{ ?>
         						<ul class="sub-menu mm-collapse" aria-expanded="false">
-        							<li><a href="<?=base_url()?>user/ib-request">IB Request</a></li>
+                                                                <li><a href="<?=base_url()?>user/ib-request"><?= lang('ib_request') ?></a></li>
         						</ul>
         					<?php } ?>
         				</li>
@@ -75,8 +75,8 @@
 						<?php endif; ?>
 						<li><a href="<?php echo base_url() ?>user/change-mt5-pass"><?= lang('change_trading_password') ?></a></li>
 						<?php if (ConfigData['enable_disable_demo_account']==true):?>
-						<li><a href="<?php echo base_url() ?>user/my-mt5-demo-account-list">My MT5 Demo Account</a></li>
-						<li><a href="<?php echo base_url() ?>user/open-demo-account">Open Demo Account</a></li>
+                                                <li><a href="<?php echo base_url() ?>user/my-mt5-demo-account-list"><?= lang('my_mt5_demo_account') ?></a></li>
+                                                <li><a href="<?php echo base_url() ?>user/open-demo-account"><?= lang('open_demo_account') ?></a></li>
 						<?php endif; ?>
 					</ul>
 				</li>
@@ -100,7 +100,7 @@
 						<li><a href="<?=base_url()?>user/withdraw"><?= lang('withdraw') ?></a></li>
 						<li><a href="<?=base_url()?>user/withdraw/history"><?= lang('withdraw_history') ?></a></li>
 						<li><a href="<?=base_url()?>user/internal-transfer"><?= lang('internal_transfer') ?> </a></li>
-						<li><a href="<?=base_url()?>user/internal-transfer-history"><?= lang('internal_transfer') ?> History</a></li>
+                                                <li><a href="<?=base_url()?>user/internal-transfer-history"><?= lang('internal_transfer_history') ?></a></li>
 					</ul>
 				</li>
 
@@ -117,7 +117,7 @@
 						</ul>
 					<?php }else{ ?>
 						<ul class="sub-menu mm-collapse" aria-expanded="false">
-							<li><a href="<?=base_url()?>user/ib-request">IB Request</a></li>
+                                                        <li><a href="<?=base_url()?>user/ib-request"><?= lang('ib_request') ?></a></li>
 						</ul>
 					<?php } ?>
 				</li>
@@ -126,11 +126,11 @@
 				<li>
 					<a href="javascript: void(0);" class="has-arrow waves-effect">
 						<i class="ri-book-mark-fill"></i>
-						<span>My Trades</span>
-					</a>
-					<ul class="sub-menu mm-collapse" aria-expanded="false">
-						<li><a href="<?=base_url()?>user/live-traders">Live Trades</a></li>
-						<li><a href="<?=base_url()?>user/close-traders">Close Trades</a></li>
+                                                <span><?= lang('my_trades') ?></span>
+                                        </a>
+                                        <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="<?=base_url()?>user/live-traders"><?= lang('live_trades') ?></a></li>
+                                                <li><a href="<?=base_url()?>user/close-traders"><?= lang('close_trades') ?></a></li>
 					</ul>
 				</li>
 				<?php endif; ?>
@@ -155,45 +155,45 @@
 				<li>
 					<a href="javascript: void(0);" class="has-arrow waves-effect">
 						<i class="ri-book-mark-fill"></i>
-						<span>Trading Platform</span>
-					</a>
-					<ul class="sub-menu mm-collapse" aria-expanded="false">
-						<?php if (ConfigData['mt5_desktop_app']): ?>
-							<li><a href="<?=ConfigData['mt5_desktop_app']?>">MT5 Desktop</a></li>
-						<?php endif; ?>
-						<?php if (ConfigData['mt5_android_app']): ?>
-							<li><a href="<?=ConfigData['mt5_android_app']?>">MT5 Android</a></li>
-						<?php endif; ?>
-						<?php if (ConfigData['mt5_ios_app']): ?>
-							<li><a href="<?=ConfigData['mt5_ios_app']?>">MT5 iOS</a></li>
-						<?php endif; ?>
-					</ul>
-				</li>
+                                                <span><?= lang('trading_platform') ?></span>
+                                        </a>
+                                        <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <?php if (ConfigData['mt5_desktop_app']): ?>
+                                                        <li><a href="<?=ConfigData['mt5_desktop_app']}"><?= lang('mt5_desktop') ?></a></li>
+                                                <?php endif; ?>
+                                                <?php if (ConfigData['mt5_android_app']): ?>
+                                                        <li><a href="<?=ConfigData['mt5_android_app']}"><?= lang('mt5_android') ?></a></li>
+                                                <?php endif; ?>
+                                                <?php if (ConfigData['mt5_ios_app']): ?>
+                                                        <li><a href="<?=ConfigData['mt5_ios_app']}"><?= lang('mt5_ios') ?></a></li>
+                                                <?php endif; ?>
+                                        </ul>
+                                </li>
 
 
 				<?php if (ConfigData['prefix']=='SSM'): ?>
 				<li>
 					<a href="javascript: void(0);" class="has-arrow waves-effect">
 						<i class="ri-book-mark-fill"></i>
-						<span>Mobile Apps
-						</span>
-					</a>
-					<ul class="sub-menu mm-collapse" aria-expanded="false">
-						<li><a href="https://play.google.com/store/apps/details?id=com.shining_star_markets">Android </a></li>
-						<li><a href="https://apps.apple.com/in/app/shining-star-markets/id6450272619">iOS</a></li>
-					</ul>
-				</li>
+                                                <span><?= lang('mobile_apps') ?>
+                                                </span>
+                                        </a>
+                                        <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                <li><a href="https://play.google.com/store/apps/details?id=com.shining_star_markets"><?= lang('android_app') ?> </a></li>
+                                                <li><a href="https://apps.apple.com/in/app/shining-star-markets/id6450272619"><?= lang('ios_app') ?></a></li>
+                                        </ul>
+                                </li>
 				<?php endif; ?>
 				
 				<?php if (ConfigData['prefix']=='IWY'): ?>
 					<li>
 						<a href="javascript: void(0);" class="has-arrow waves-effect">
 							<i class="ri-book-mark-fill"></i>
-							<span>Social Connections</span>
-						</a>
-						<ul class="sub-menu mm-collapse" aria-expanded="false">
-							<li><a href="https://t.me/infowaymarkets" target="_blank">Telegram</a></li>
-							<li><a href="https://wa.me/+971506706355" target="_blank">WhatsApp</a></li>
+                                                        <span><?= lang('social_connections') ?></span>
+                                                </a>
+                                                <ul class="sub-menu mm-collapse" aria-expanded="false">
+                                                        <li><a href="https://t.me/infowaymarkets" target="_blank"><?= lang('telegram') ?></a></li>
+                                                        <li><a href="https://wa.me/+971506706355" target="_blank"><?= lang('whatsapp') ?></a></li>
 						</ul>
 					</li>
 				<?php endif; ?>

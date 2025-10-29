@@ -32,7 +32,7 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
 						<div class="card">
 							<div class="card-body">
 								
-								<h4 class="card-title mb-4">Edit Commission Group</h4>
+                                                                <h4 class="card-title mb-4"><?= lang('edit_commission_group') ?></h4>
 								<form class="form-control" action="<?php echo base_url()."save-commission-group"?>" method="post">
 									<?php 
 									$var = '';
@@ -43,21 +43,21 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
 									$pname = $getUserIbCommissionGroup_p->plan_name;
 										?>
 								    <div class="row mt-2">
-								        <?php if (ConfigData['prefix']!='TG'): ?>
-								        <div class="col-sm-3">
-    										<input type="text" class="form-control" name="" value="<?php echo $pname ?> " readonly>
-    										<small>
-    										    <b><?php echo $var; ?></b>
-    										</small>
-    									</div>
-    									<?php endif; ?>
+                                                                        <?php if (ConfigData['prefix']!='TG'): ?>
+                                                                        <div class="col-sm-3">
+                                                                                <input type="text" class="form-control" name="" value="<?php echo $pname ?> " readonly>
+                                                                                <small>
+                                                                                    <b><?php echo $var; ?></b>
+                                                                                </small>
+                                                                        </div>
+                                                                        <?php endif; ?>
 								    </div>
 									<input type="hidden" name="downline_level" id="downline_level" value="<?php echo $getUserIbCommissionGroup_p->downline_level ?>">
 
 									<div class="row mt-2">
 									
 									<?php if(count($getselfr) > 0){ ?>
-                                    <label class="mt-4">IB Plan Link:</label>
+                                    <label class="mt-4"><?= lang('ib_plan_link') ?>:</label>
 										<?php for($i= 1; $i<= $getReflinkCnt->ref_link_cnt;$i++){
 
 												 $getselfrr = $this->db->query("SELECT * FROM `ib_commission`where  unique_id = '$sessionUser' and ref_link_name = '$i' and level_no = (SELECT MAX(level_no) FROM `ib_commission`where  unique_id = '$sessionUser' and ref_link_name = '$i' )")->result();
@@ -75,14 +75,14 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
                                        ?> <p><b><?php echo $getselfrdetails->plan_name.' '.$downlinesharevalue ?></b> : <a target="_blank" href="<?php echo base_url(); ?>register?reffid=<?php echo $_SESSION['unique_id'] ?>&link=<?php echo $i ?>"><?php echo base_url(); ?>register?reffid=<?php echo $_SESSION['unique_id'] ?>&link=<?php echo $i ?></a></p>
 										<?php }
 									  }else{ ?>	
-									 <label class="mt-4">Create Link and Enter Downline share:</label>
+                                                                         <label class="mt-4"><?= lang('create_link_enter_downline_share') ?>:</label>
 										<div class="row">
 										<div class="row mt-3 mb-5">
 											<div class="col-md-8">
-												<input type="number" name="ref_link_count" placeholder="HOW MANY LINKS" class="form-control input-lg levelGenerate" id="levelName-1">
+                                                                                                <input type="number" name="ref_link_count" placeholder="<?= lang('how_many_links') ?>" class="form-control input-lg levelGenerate" id="levelName-1">
 											</div>
 											<div class="col-md-4">
-												<button type="button" class="btn btn-outline-success btn-md edit  waves-effect waves-light" data-packageType="1" id="generatesBtn" >GENERATE </button>
+                                                                                                <button type="button" class="btn btn-outline-success btn-md edit  waves-effect waves-light" data-packageType="1" id="generatesBtn" ><?= lang('generate') ?> </button>
 											</div>
 										</div>
 											<input type="hidden" name="_token" value="H3UArMNaAcwqea1MFbjRm7gZEeti0T6OZTbsJokU">
@@ -107,13 +107,13 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
 								
 								<div class="row">
 								<?php if(count($getselfr) <= 0){ ?>
-									<div class="col-sm-2 mt-2">
-										<button type="submit" class="btn btn-outline-success btn-sm edit  waves-effect waves-light mt-3" id="">Submit</button>
-									</div>
-								<?php }else{ ?>
-									<a href="<?php echo base_url()."add-more-ref-link/".$getUserIbCommissionGroup_p->group_id."/".$getUserIbCommissionGroup_p->plan_id ?>">
-									<button type="button" class="btn btn-outline-secondary btn-sm edit  waves-effect waves-light " id="">+ Add More</button>
-								</a>
+                                                                        <div class="col-sm-2 mt-2">
+                                                                                <button type="submit" class="btn btn-outline-success btn-sm edit  waves-effect waves-light mt-3" id=""><?= lang('submit') ?></button>
+                                                                        </div>
+                                                                <?php }else{ ?>
+                                                                        <a href="<?php echo base_url()."add-more-ref-link/".$getUserIbCommissionGroup_p->group_id."/".$getUserIbCommissionGroup_p->plan_id ?>">
+                                                                        <button type="button" class="btn btn-outline-secondary btn-sm edit  waves-effect waves-light " id="">+ <?= lang('add_more') ?></button>
+                                                                </a>
 								<?php } ?>
 							</div>
 								</form>
@@ -138,8 +138,8 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
 		$('#removeIb').click(function () {
 			Swal.fire(
 				{
-					title: "Remove IB?",
-					text: 'Do you want to remove IB?',
+                                        title: "<?= lang('remove_ib_title') ?>",
+                                        text: '<?= lang('remove_ib_question') ?>',
 					icon: 'question',
 					confirmButtonColor: '#5664d2'
 				}
@@ -150,8 +150,8 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
 		$('#removeIb').click(function () {
 			Swal.fire(
 				{
-					title: "Remove IB?",
-					text: 'Do you want to remove IB?',
+                                        title: "<?= lang('remove_ib_title') ?>",
+                                        text: '<?= lang('remove_ib_question') ?>',
 					icon: 'question',
 					confirmButtonColor: '#5664d2'
 				}
@@ -168,16 +168,16 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
 				$('input#levelName-'+packageTypeName+'').removeClass("error-number");
 				var html='';
 				for (var index=1;index<=levelNumber;index++){
-					html+=`<div class="mainrow" id="maindivRow-`+index+`-`+packageTypeName+`">
-								<div class="row mt-2">
-								<div class="row mt-2">
-								<div class="col-sm-2 mt-2">
-    								<label>Plan Name: </label>
-    							</div>
-    							<div class="col-sm-3 mt-2">
-    								<input type="text" class="form-control margin-top-10 no-left-border " name="p_name_`+index+`" id="p_name_`+index+`" value="" placeholder="Enter Plam Name" required>
-								</div>
-								</div>
+                                        html+=`<div class="mainrow" id="maindivRow-`+index+`-`+packageTypeName+`">
+                                                                <div class="row mt-2">
+                                                                <div class="row mt-2">
+                                                                <div class="col-sm-2 mt-2">
+                                                                <label><?= lang('plan_name') ?>: </label>
+                                                        </div>
+                                                        <div class="col-sm-3 mt-2">
+                                                                <input type="text" class="form-control margin-top-10 no-left-border " name="p_name_`+index+`" id="p_name_`+index+`" value="" placeholder="<?= lang('enter_plan_name') ?>" required>
+                                                        </div>
+                                                        </div>
 									<div class="row mt-2">
 									 
 								       <?php foreach ($UserIbCommissionGroup as $getUserIbCommissionGroup) {
@@ -189,7 +189,7 @@ $getselfr = $this->db->query("SELECT * FROM `ib_commission` where unique_id = '$
     									    	<input type="hidden" value="<?php echo $getUserIbCommissionGroup->value ?>" name="sharefromupline_`+index+`_`+<?php echo $getUserIbCommissionGroup->group_id ?>+`" class="form-control" readonly >
     									    <input type="hidden" name="plan_id_`+index+`" id="plan_id_`+index+`" value="<?php echo $getUserIbCommissionGroup->plan_id ?>">
 									        <input type="hidden" name="group_id_`+index+`_`+<?php echo $getUserIbCommissionGroup->group_id ?>+`" id="group_id_`+index+`_`+<?php echo $getUserIbCommissionGroup->group_id ?>+`" value="<?php echo $getUserIbCommissionGroup->group_id ?>">
-									        <input name="level_share_value_`+index+`_`+<?php echo $getUserIbCommissionGroup->group_id ?>+`" class="form-control margin-top-10 no-left-border " type="number"  value=""  step = "0.01"  max="<?php echo $getUserIbCommissionGroup->value ?>"  required placeholder="Share value">
+                                                                                <input name="level_share_value_`+index+`_`+<?php echo $getUserIbCommissionGroup->group_id ?>+`" class="form-control margin-top-10 no-left-border " type="number"  value=""  step = "0.01"  max="<?php echo $getUserIbCommissionGroup->value ?>"  required placeholder="<?= lang('share_value') ?>">
                                         </div>
 									    <div cass="col-sm-6">
 									    </div>

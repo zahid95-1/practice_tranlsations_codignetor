@@ -45,10 +45,10 @@
 								<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
 									   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 									<thead>
-									<tr>
-										<th>Level #</th>
-										<th>Amount</th>
-									</tr>
+                                                                        <tr>
+                                                                                <th><?= lang('level') ?> #</th>
+                                                                                <th><?= lang('amount') ?></th>
+                                                                        </tr>
 									</thead>
 									<tbody>
 									<?php foreach($dataItem['DepositHistory'] as $deposithistory){ 

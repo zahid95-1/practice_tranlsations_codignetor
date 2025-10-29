@@ -27,7 +27,7 @@ if (isset($dataItem['filter'])) {
 					<div class="card">
 						<div class="card-body">
 
-							<h4 class="card-title">Commission Listing</h4><hr/>
+                                                        <h4 class="card-title"><?= lang('commission_listing') ?></h4><hr/>
 <!--							<h5  class="card-title">Total Commission : 153.00</h5>-->
 <!--							<h5  class="card-title mb-4">Total Lot : 0.00</h5>-->
 
@@ -35,26 +35,26 @@ if (isset($dataItem['filter'])) {
                                 <div class="row">
                                     <div class="col-md-3">
                                         <select class="form-select" id="validationCustom04" name="filtering_options">
-                                            <option value="">Select Date</option>
-                                            <option value="1" <?=($filterId==1)?'selected':''?>>Today</option>
-                                            <option value="2" <?=($filterId==2)?'selected':''?>>Last 3 Days</option>
-                                            <option value="3" <?=($filterId==3)?'selected':''?>>Last Week</option>
-                                            <option value="4" <?=($filterId==4)?'selected':''?>>Last Month</option>
-                                            <option value="5" <?=($filterId==5)?'selected':''?>>Last 3 Month</option>
-                                            <option value="6" <?=($filterId==6)?'selected':''?>>Last 6 Month</option>
-                                            <option value="8" <?=($filterId==8)?'selected':''?>>Last 1 Year</option>
-                                            <option value="7" <?=($filterId==7)?'selected':''?>>Custom Date</option>
+                                            <option value=""><?= lang('select_date') ?></option>
+                                            <option value="1" <?=($filterId==1)?'selected':''?>><?= lang('today') ?></option>
+                                            <option value="2" <?=($filterId==2)?'selected':''?>><?= lang('last_3_days') ?></option>
+                                            <option value="3" <?=($filterId==3)?'selected':''?>><?= lang('last_week') ?></option>
+                                            <option value="4" <?=($filterId==4)?'selected':''?>><?= lang('last_month') ?></option>
+                                            <option value="5" <?=($filterId==5)?'selected':''?>><?= lang('last_3_month') ?></option>
+                                            <option value="6" <?=($filterId==6)?'selected':''?>><?= lang('last_6_month') ?></option>
+                                            <option value="8" <?=($filterId==8)?'selected':''?>><?= lang('last_1_year') ?></option>
+                                            <option value="7" <?=($filterId==7)?'selected':''?>><?= lang('custom_date') ?></option>
                                         </select>
                                     </div>
 
                                     <div class="col-sm-3 <?php if ($filterId!=7){echo 'd-none';} ?>" id="from_date">
-                                        <input class="form-control" type="text" onfocus="(this.type='date')" name="from_date" id="" value="<?php if(isset($_POST['from_date'])){ echo $_POST['from_date']; }?>" placeholder="From Date">
+                                        <input class="form-control" type="text" onfocus="(this.type='date')" name="from_date" id="" value="<?php if(isset($_POST['from_date'])){ echo $_POST['from_date']; }?>" placeholder="<?= lang('from_date') ?>">
                                     </div>
                                     <div class="col-sm-3 <?php if ($filterId!=7){echo 'd-none';} ?>" id="to_date">
-                                        <input class="form-control " type="text" onfocus="(this.type='date')"  name="to_date" id="" value="<?php if(isset($_POST['to_date'])){ echo $_POST['to_date']; }?>" placeholder="To Date">
+                                        <input class="form-control " type="text" onfocus="(this.type='date')"  name="to_date" id="" value="<?php if(isset($_POST['to_date'])){ echo $_POST['to_date']; }?>" placeholder="<?= lang('to_date') ?>">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input class="form-control btn-primary" type="submit" name="search" id="search" value="Search">
+                                        <input class="form-control btn-primary" type="submit" name="search" id="search" value="<?= lang('search') ?>">
                                     </div>
                                 </div>
                             </form>
@@ -63,19 +63,19 @@ if (isset($dataItem['filter'])) {
 							<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
 								   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 								<thead>
-								<tr>
-									<th>Login Id</th>
-									<th>Date</th>
-									<th>Client Name</th>
-									<th>Level</th>
-									<th>Order</th>
-									<th>Symbol</th>
-									<th>Price</th>
-									<th>Profit</th>
-									<th>Volume</th>
-									<th>My Commission</th>
-									<th>Action</th>
-								</tr>
+                                                                <tr>
+                                                                        <th><?= lang('login_id') ?></th>
+                                                                        <th><?= lang('date') ?></th>
+                                                                        <th><?= lang('client_name') ?></th>
+                                                                        <th><?= lang('level') ?></th>
+                                                                        <th><?= lang('order') ?></th>
+                                                                        <th><?= lang('symbol') ?></th>
+                                                                        <th><?= lang('price') ?></th>
+                                                                        <th><?= lang('profit') ?></th>
+                                                                        <th><?= lang('volume') ?></th>
+                                                                        <th><?= lang('my_commission') ?></th>
+                                                                        <th><?= lang('action') ?></th>
+                                                                </tr>
 								</thead>
 								<tbody>
 								<?php if (isset($dataItem['lotInformations']) && $dataItem['lotInformations']):
@@ -97,9 +97,9 @@ if (isset($dataItem['filter'])) {
 									<td><?=number_format($item->lot,2)?></td>
 									<td>$ <?=$item->calculated_commission?></td>
 									<td class="depostst">
-										<?php
-										if ($item->action==1){echo "Buy";}else{echo "Sell";}
-										?>
+                                                                                <?php
+                                                                                if ($item->action==1){echo lang('buy');}else{echo lang('sell');}
+                                                                                ?>
 									</td>
 								</tr>
 								<?php endforeach; endif; ?>
