@@ -49,21 +49,21 @@
 							<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
 								   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 								<thead>
-								<tr>
-									<th>Action</th>
-									<th>IB ID</th>
-									<th>Name</th>
+                                                                <tr>
+                                                                        <th><?= lang('action') ?></th>
+                                                                        <th><?= lang('ib_id') ?></th>
+                                                                        <th><?= lang('name') ?></th>
 
-									<th>Upline IB</th>
-									<th>Email</th>
-									<th>Phone</th>
-									<th>Level</th>
-									<th>Country</th>
-									<th>Commission Share Value</th>
-									<th>Commission</th>
-									<th>Details</th>
+                                                                        <th><?= lang('upline_ib') ?></th>
+                                                                        <th><?= lang('email') ?></th>
+                                                                        <th><?= lang('phone') ?></th>
+                                                                        <th><?= lang('level') ?></th>
+                                                                        <th><?= lang('country') ?></th>
+                                                                        <th><?= lang('commission_share_value') ?></th>
+                                                                        <th><?= lang('commission') ?></th>
+                                                                        <th><?= lang('details') ?></th>
 
-								</tr>
+                                                                </tr>
 								</thead>
 								<tbody>
 								<?php
@@ -75,27 +75,27 @@
 									?>
 									<tr>
 										<td>
-											<a class="btn btn-outline-secondary btn-sm edit"  data-bs-toggle="modal" data-bs-target="#deposit_history-<?=$userId?>">
-												<i class="fas fa-arrow-alt-circle-up" title="Deposit History"></i>
+                                                                                        <a class="btn btn-outline-secondary btn-sm edit"  data-bs-toggle="modal" data-bs-target="#deposit_history-<?=$userId?>">
+                                                                                                <i class="fas fa-arrow-alt-circle-up" title="<?= lang('deposit_history') ?>"></i>
 											</a>
 											<!-- First modal dialog -->
 											<div class="modal fade" id="deposit_history-<?=$userId?>" aria-hidden="true" aria-labelledby="..." tabindex="-1">
 												<div class="modal-dialog modal-md modal-dialog-centered">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title">Deposit History</h5>
+                                                                                                                        <h5 class="modal-title"><?= lang('deposit_history') ?></h5>
 															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModal-<?=$userId?>"></button>
 														</div>
 														<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
 															   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
 															<thead>
-															<tr>
-																<th>Mt5 Login ID</th>
-																<th>Amount</th>
-																<th>Date</th>
+                                                                                                                        <tr>
+                                                                                                                                <th><?= lang('mt5_login_id') ?></th>
+                                                                                                                                <th><?= lang('amount') ?></th>
+                                                                                                                                <th><?= lang('date') ?></th>
 
-															</tr>
+                                                                                                                        </tr>
 															</thead>
 															<tbody>
 															<?php
@@ -112,9 +112,9 @@
 																</tr>
 
 															<?php } ?>
-															<tr>
-																<th>Total Deposit</th>
-																<th><?php echo $total_amount; ?></th>
+                                                                                                                        <tr>
+                                                                                                                                <th><?= lang('total_deposit') ?></th>
+                                                                                                                                <th><?php echo $total_amount; ?></th>
 															</tr>
 															</tbody>
 														</table>
@@ -123,27 +123,27 @@
 												</div>
 											</div>
 
-											<a class="btn btn-outline-secondary btn-sm edit"  data-bs-toggle="modal" data-bs-target="#withdrawal_history-<?=$userId?>">
-												<i class="fas fa-arrow-alt-circle-down" title="Withdraw History"></i>
+                                                                                        <a class="btn btn-outline-secondary btn-sm edit"  data-bs-toggle="modal" data-bs-target="#withdrawal_history-<?=$userId?>">
+                                                                                                <i class="fas fa-arrow-alt-circle-down" title="<?= lang('withdrawal_history') ?>"></i>
 											</a>
 											<!-- First modal dialog -->
 											<div class="modal fade" id="withdrawal_history-<?=$userId?>" aria-hidden="true" aria-labelledby="..." tabindex="-1">
 												<div class="modal-dialog modal-md modal-dialog-centered">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title">Withdrawal History</h5>
+                                                                                                                        <h5 class="modal-title"><?= lang('withdrawal_history') ?></h5>
 															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModal-<?=$userId?>"></button>
 														</div>
 														<table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
 															   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
 
 															<thead>
-															<tr>
-																<th>Mt5 Login ID</th>
-																<th>Amount</th>
-																<th>Requested Datetime</th>
+                                                                                                                        <tr>
+                                                                                                                                <th><?= lang('mt5_login_id') ?></th>
+                                                                                                                                <th><?= lang('amount') ?></th>
+                                                                                                                                <th><?= lang('requested_datetime') ?></th>
 
-															</tr>
+                                                                                                                        </tr>
 															</thead>
 															<tbody>
 															<?php
@@ -159,9 +159,9 @@
 																</tr>
 
 															<?php } ?>
-															<tr>
-																<th>Total Withdrawal</th>
-																<th><?php echo $total_amount; ?></th>
+                                                                                                                        <tr>
+                                                                                                                                <th><?= lang('total_withdrawal') ?></th>
+                                                                                                                                <th><?php echo $total_amount; ?></th>
 															</tr>
 															</tbody>
 														</table>
@@ -176,7 +176,7 @@
 										<td><?php echo $IbClientValue->upline_ib ?></td>
 										<td><?php echo $IbClientValue->email ?></td>
 										<td><?php echo $IbClientValue->mobile ?></td>
-										<td><?php echo "Level ".$IbClientValue->level_no ?></td>
+                                                                                <td><?php echo sprintf(lang('level_with_number'), $IbClientValue->level_no) ?></td>
 										<td><?php echo $IbClientValue->country_name ?></td>
 										<td><?php echo $IbClientValue->commission_share_value ?></td>
 										<td><?php echo "$ ".number_format($IbClientValue->calculated_commission , 2)?></td>
@@ -187,11 +187,11 @@
 										<td>
 
 											<?php if($balanceMt5->mt5_login_id_count > 0){ ?>
-												<a class="btn btn-outline-secondary btn-sm edit" title="User View" style="margin-right: 1px;" href="javascript:void(0)" id="mt5AccountListDetails" data-key-index="<?=$key?>" data-account-id="<?=$balanceMt5->mt5_login_id?>">
-													<i class="fas fa-eye"></i> View Details
+                                                                                                <a class="btn btn-outline-secondary btn-sm edit" title="<?= lang('details') ?>" style="margin-right: 1px;" href="javascript:void(0)" id="mt5AccountListDetails" data-key-index="<?=$key?>" data-account-id="<?=$balanceMt5->mt5_login_id?>">
+                                                                                                        <i class="fas fa-eye"></i> <?= lang('view_details') ?>
 												</a>
 											<?php }else{ ?>
-												<?php echo 'No Trading Account'; }  ?>
+                                                                                                <?php echo lang('no_trading_account'); }  ?>
 										</td>
 									</tr>
 								<?php } } ?>
@@ -213,7 +213,7 @@
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Account Details</h5>
+                                <h5 class="modal-title"><?= lang('account_details') ?></h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModal-<?=$key?>"></button>
 			</div>
 
@@ -265,24 +265,24 @@
 				{
 					var obj = JSON.parse(response);
 					if (response!=0){
-						let html=`<tbody>
-									<tr>
-										<th scope="row">Login :</th>
-										<td>${obj.Login}</td>
-										<th scope="row">Balance :</th>
-										<td>$${obj.Balance}</td>
-										<td>Margin Free :</td>
-										<td>${obj.MarginFree}</td>
-									</tr>
-									<tr>
-										<td>Margin Leverage  :</td>
-										<td>${obj.MarginLeverage}</td>
-										<th scope="row">Credit  :</th>
-										<td>${obj.Credit}</td>
-										<th scope="row">Equity   :</th>
-										<td>${obj.Equity}</td>
-									</tr>
-									</tbody>`;
+                                                let html=`<tbody>
+                                                                        <tr>
+                                                                                <th scope="row"><?= lang('login') ?> :</th>
+                                                                                <td>${obj.Login}</td>
+                                                                                <th scope="row"><?= lang('balance') ?> :</th>
+                                                                                <td>$${obj.Balance}</td>
+                                                                                <td><?= lang('margin_free') ?> :</td>
+                                                                                <td>${obj.MarginFree}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td><?= lang('margin_leverage') ?> :</td>
+                                                                                <td>${obj.MarginLeverage}</td>
+                                                                                <th scope="row"><?= lang('credit') ?> :</th>
+                                                                                <td>${obj.Credit}</td>
+                                                                                <th scope="row"><?= lang('equity') ?> :</th>
+                                                                                <td>${obj.Equity}</td>
+                                                                        </tr>
+                                                                        </tbody>`;
 
 						$('#accountDetailsTable').html(html)
 					}
